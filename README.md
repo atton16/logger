@@ -41,7 +41,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(activityLogMiddleware);
   await app.listen(3000, () => {
-    logger.crit(`Listening at 127.0.0.1:3000`);
+    logger.info(`Listening at 127.0.0.1:3000`);
   });
 }
 bootstrap();
