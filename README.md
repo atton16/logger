@@ -11,7 +11,7 @@ npm install atton16-logger
 ## Usage
 
 ```typescript
-import logger from 'atton16-logger';
+import { logger } from 'atton16-logger';
 
 logger.log('info', 'hello world');
 logger.debug('debug message');
@@ -22,6 +22,54 @@ logger.info('some log');
 ## Log Level
 
 Log level can be controlled by `LOG_LEVEL` environment variable. See [winston Logging Level](https://github.com/winstonjs/winston#logging-levels) for more detail.
+
+## Activity Logging (Additional Features)
+
+The package also comes with standard request/response logging middleware for convenient logging.
+
+### Usage - Activity Logging
+
+Example:
+
+```typescript
+// main.ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { activityLogMiddleware, logger } from 'atton16-logger';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.use(activityLogMiddleware);
+  await app.listen(3000, () => {
+    logger.crit(`Listening at 127.0.0.1:3000`);
+  });
+}
+bootstrap();
+```
+
+### Skip Dumping Response Body
+
+The middleware is highly useful for running web service in production environment. However, sometimes the response body is fairly huge (i.e. image, binary) and you might wanted to skip dumping it. To do that, you can use ActivityLogResponseSkipBody interceptor provided.
+
+Example:
+
+```typescript
+// app.controller.ts
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { ActivityLogResponseSkipBody } from 'atton16-logger';
+
+@Controller()
+export class AppController {
+  @Get()
+  @UseInterceptors(ActivityLogResponseSkipBody)
+  helloWorld(): string {
+    let ret: string;
+    for (let i = 0; i < 100000000; i++) { ret += 'A'; }
+    return ret; // 100 million A's
+  }
+
+}
+```
 
 ## License
 
