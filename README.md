@@ -19,6 +19,15 @@ logger.info('some log');
 
 ```
 
+## Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| LOG_FILE_PREFIX | File prefiex (should be your application name) | `` |
+| LOG_MAX_FILES | Maximum file to be kept | `60d` |
+| LOG_FOLDER | Log folder for file transport | `./logs` |
+| LOG_LEVEL | Log level for console transport | `debug` |
+
 ## Log Level
 
 Log level can be controlled by `LOG_LEVEL` environment variable. See [winston Logging Level](https://github.com/winstonjs/winston#logging-levels) for more detail.
