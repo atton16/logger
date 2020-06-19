@@ -27,6 +27,7 @@ logger.info('some log');
 | LOG_MAX_FILES | Maximum file to be kept | `60d` |
 | LOG_FOLDER | Log folder for file transport | `./logs` |
 | LOG_LEVEL | Log level for console transport | `debug` |
+| LOG_APP_NAME | Set logging app name | `NestWinston` |
 
 ## Log Level
 

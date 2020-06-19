@@ -4,13 +4,15 @@ import * as winston from 'winston';
 import * as path from 'path';
 import 'winston-daily-rotate-file';
 
+const appName = process.env.LOG_APP_NAME || '';
+
 const consoleFormat = winston.format.combine(
   winston.format.timestamp(),
-  nestWinstonModuleUtilities.format.nestLike(),
+  nestWinstonModuleUtilities.format.nestLike(appName),
 );
 const fileFormat  = winston.format.combine(
   winston.format.timestamp(),
-  nestLikeFileFormat(),
+  nestLikeFileFormat(appName),
 );
 const filePrefix = process.env.LOG_FILE_PREFIX || '';
 const filePatternError = filePrefix ? `${filePrefix}.err.%DATE%.log` : 'err.%DATE%.log';
