@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/atton16/logger/compare/v1.2.1...v1.3.0) (2020-06-19)
+
+
+### Features
+
+* **appName:** Support setting app name ([70dd4dc](https://github.com/atton16/logger/commit/70dd4dc830caefffcf946165993506c2455aa5c9))
+
 ### [1.2.1](https://github.com/atton16/logger/compare/v1.2.0...v1.2.1) (2020-06-16)
 
 ## [1.2.0](https://github.com/atton16/logger/compare/v1.1.0...v1.2.0) (2020-06-16)
