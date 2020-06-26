@@ -1,6 +1,6 @@
 # atton16-logger
 
-A pre-configured winston logger for web services.
+A pre-configured winston logger for web services. Works with NestJS and ExpressJS.
 
 ## Installation
 
@@ -9,6 +9,8 @@ npm install atton16-logger
 ```
 
 ## Usage
+
+### TypeScript
 
 ```typescript
 import { logger } from 'atton16-logger';
@@ -19,7 +21,20 @@ logger.info('some log');
 
 ```
 
-## Environment Variables
+### JavaScript
+
+```javascript
+const logger = require('atton16-logger').logger;
+
+logger.log('info', 'hello world');
+logger.debug('debug message');
+logger.info('some log');
+
+```
+
+## Configuration
+
+The logger can be configured using environment variables. Here is the support configuration.
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -29,7 +44,7 @@ logger.info('some log');
 | LOG_LEVEL | Log level for console transport | `debug` |
 | LOG_APP_NAME | Set logging app name | `NestWinston` |
 
-## Log Level
+### Log Level
 
 Log level can be controlled by `LOG_LEVEL` environment variable. See [winston Logging Level](https://github.com/winstonjs/winston#logging-levels) for more detail.
 
@@ -39,7 +54,7 @@ The package also comes with standard request/response logging middleware for con
 
 ### Usage - Activity Logging
 
-Example:
+Example with NestJS:
 
 ```typescript
 // main.ts
@@ -57,11 +72,32 @@ async function bootstrap() {
 bootstrap();
 ```
 
+Example with ExpressJS:
+
+```javascript
+const express = require('express');
+const { activityLogMiddleware, logger } = require('atton16-logger');
+
+const app = express();
+app.use(activityLogMiddleware);
+
+app.get('/', (req, res) => {
+  res.json({'timestamp': Date.now()});
+});
+
+app.listen(3000, () => {
+  logger.info(`Listening at 127.0.0.1:3000`);
+});
+
+```
+
 ### Skip Dumping Response Body
 
-The middleware is highly useful for running web service in production environment. However, sometimes the response body is fairly huge (i.e. image, binary) and you might wanted to skip dumping it. To do that, you can use ActivityLogResponseSkipBody interceptor provided.
+The middleware is highly useful for running web service in production environment. However, sometimes the response body is fairly huge (i.e. image, binary) and you might wanted to skip dumping it.
+If you are using NestJS, you can use `ActivityLogResponseSkipBody` interceptor provided.
+Or if you are using ExpressJS, you can use `responseSkipBody` middleware provided.
 
-Example:
+Example with NestJS:
 
 ```typescript
 // app.controller.ts
@@ -79,6 +115,29 @@ export class AppController {
   }
 
 }
+```
+
+Example with ExpressJS:
+
+```javascript
+const express = require('express');
+const {
+  activityLogMiddleware,
+  logger,
+  responseSkipBody,
+} = require('atton16-logger');
+
+const app = express();
+app.use(activityLogMiddleware);
+
+app.get('/', responseSkipBody, (req, res) => {
+  let ret;
+  for (let i = 0; i < 100000000; i++) { ret += 'A'; }
+  res.send(ret);
+});
+
+app.listen(3000);
+
 ```
 
 ## License
