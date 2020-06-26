@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/atton16/logger/compare/v1.3.1...v1.4.0) (2020-06-26)
+
+
+### Features
+
+* **SkipResponseBody:** add express-compatible middleware ([ae58e62](https://github.com/atton16/logger/commit/ae58e629a086e0670bcf1a7daa28fb83d96c5b51))
+
+
+### Bug Fixes
+
+* fix crashes when server response without content type (i.e. 304 Not Modified) ([fcf263c](https://github.com/atton16/logger/commit/fcf263cfe4402d74e5b13335b019f1c0a4172965))
+
 ### [1.3.1](https://github.com/atton16/logger/compare/v1.3.0...v1.3.1) (2020-06-19)
 
 ## [1.3.0](https://github.com/atton16/logger/compare/v1.2.1...v1.3.0) (2020-06-19)
