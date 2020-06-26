@@ -24,12 +24,17 @@ export function activityLogMiddleware(req: Request, res: Response, next: Functio
   res.on('finish', function() {
     const statusCode = this.statusCode;
     const skipBody = this.skipBody;
-    const isJson = this.getHeaders()['content-type'].includes('application/json');
-    resBody = isJson ? JSON.stringify(JSON.parse(resBody), null, 2) : resBody;
+    const contentType = this.getHeaders()['content-type'];
     logger.info(`res.statusCode: ${statusCode}`);
-    if (statusCode < 300 && skipBody) {
+    if (
+      !contentType ||
+      (statusCode < 300 && skipBody)
+    ) {
       logger.info(`res.body DUMP SKIPPED!`);
     } else {
+      if (contentType.includes('application/json')) {
+        resBody = JSON.stringify(JSON.parse(resBody), null, 2);
+      }
       logger.info(`res.body DUMP START`);
       logger.info(resBody);
       logger.info(`res.body DUMP END`);
