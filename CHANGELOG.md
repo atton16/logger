@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/atton16/logger/compare/v1.4.1...v1.5.0) (2021-03-03)
+
+
+### Features
+
+* add color, timestamp, transports configuration support ([825668f](https://github.com/atton16/logger/commit/825668f91ccde9cf66ca75f40910266576ee8717))
+
 ### [1.4.1](https://github.com/atton16/logger/compare/v1.4.0...v1.4.1) (2020-07-22)
 
 ## [1.4.0](https://github.com/atton16/logger/compare/v1.3.1...v1.4.0) (2020-06-26)
