@@ -1,11 +1,11 @@
-# atton16-logger
+# @atton16/logger
 
 A pre-configured winston logger for web services. Works with NestJS and ExpressJS.
 
 ## Installation
 
 ```bash
-npm install atton16-logger
+npm install @atton16/logger
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install atton16-logger
 ### TypeScript
 
 ```typescript
-import { logger } from 'atton16-logger';
+import { logger } from '@atton16/logger';
 
 logger.log('info', 'hello world');
 logger.debug('debug message');
@@ -24,7 +24,7 @@ logger.info('some log');
 ### JavaScript
 
 ```javascript
-const logger = require('atton16-logger').logger;
+const logger = require('@atton16/logger').logger;
 
 logger.log('info', 'hello world');
 logger.debug('debug message');
@@ -60,7 +60,7 @@ Example with NestJS:
 // main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { activityLogMiddleware, logger } from 'atton16-logger';
+import { activityLogMiddleware, logger } from '@atton16/logger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -76,7 +76,7 @@ Example with ExpressJS:
 
 ```javascript
 const express = require('express');
-const { activityLogMiddleware, logger } = require('atton16-logger');
+const { activityLogMiddleware, logger } = require('@atton16/logger');
 
 const app = express();
 app.use(activityLogMiddleware);
@@ -102,7 +102,7 @@ Example with NestJS:
 ```typescript
 // app.controller.ts
 import { Controller, Get, UseInterceptors } from '@nestjs/common';
-import { ActivityLogResponseSkipBody } from 'atton16-logger';
+import { ActivityLogResponseSkipBody } from '@atton16/logger';
 
 @Controller()
 export class AppController {
@@ -125,7 +125,7 @@ const {
   activityLogMiddleware,
   logger,
   responseSkipBody,
-} = require('atton16-logger');
+} = require('@atton16/logger');
 
 const app = express();
 app.use(activityLogMiddleware);
