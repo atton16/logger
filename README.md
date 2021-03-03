@@ -43,6 +43,9 @@ The logger can be configured using environment variables. Here is the support co
 | LOG_FOLDER | Log folder for file transport | `./logs` |
 | LOG_LEVEL | Log level for console transport | `debug` |
 | LOG_APP_NAME | Set logging app name | `NestWinston` |
+| LOG_COLOR | Enable log coloring | `true` |
+| LOG_TIMESTAMP | Include timestamp in log message | `true` |
+| LOG_TRANSPORTS | Transports to emit log | `console,file` |
 
 ### Log Level
 
