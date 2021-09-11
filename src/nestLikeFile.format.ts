@@ -12,22 +12,37 @@ const nestLikeColorScheme: Record<string, bare.Format> = {
   verbose: clc.cyanBright,
 };
 
-export const nestLikeFileFormat = (appName = 'NestWinston', opt = {color: true, timestamp: true}): Format => format.printf(({ context, level, timestamp, message, ...meta }) => {
-  const color = nestLikeColorScheme[level] || ((text: string): string => text);
+export const nestLikeFileFormat = (
+  appName = 'NestWinston',
+  opt = { color: true, timestamp: true }
+): Format =>
+  format.printf(({ context, level, timestamp, message, ...meta }) => {
+    const color =
+      nestLikeColorScheme[level] || ((text: string): string => text);
 
-  if (opt.color) {
-    return `${color(`[${appName}]`)} ` +
-           `${clc.yellow(level.charAt(0).toUpperCase() + level.slice(1))}\t` +
-           ('undefined' !== typeof timestamp && opt.timestamp ? `${new Date(timestamp).toLocaleString()} ` : '') +
-           ('undefined' !== typeof context ? `${clc.yellow('[' + context + ']')} ` : '') +
-           `${color(message)} - ` +
-           `${safeStringify(meta)}`;
-  }
+    if (opt.color) {
+      return (
+        `${color(`[${appName}]`)} ` +
+        `${clc.yellow(level.charAt(0).toUpperCase() + level.slice(1))}\t` +
+        ('undefined' !== typeof timestamp && opt.timestamp
+          ? `${new Date(timestamp).toLocaleString()} `
+          : '') +
+        ('undefined' !== typeof context
+          ? `${clc.yellow('[' + context + ']')} `
+          : '') +
+        `${color(message)} - ` +
+        `${safeStringify(meta)}`
+      );
+    }
 
-  return `[${appName}] ` +
-         `${level.charAt(0).toUpperCase() + level.slice(1)}\t` +
-         ('undefined' !== typeof timestamp && opt.timestamp ? `${new Date(timestamp).toLocaleString()} ` : '') +
-         ('undefined' !== typeof context ? `${'[' + context + ']'} ` : '') +
-         `${message} - ` +
-         `${safeStringify(meta)}`;
-});
+    return (
+      `[${appName}] ` +
+      `${level.charAt(0).toUpperCase() + level.slice(1)}\t` +
+      ('undefined' !== typeof timestamp && opt.timestamp
+        ? `${new Date(timestamp).toLocaleString()} `
+        : '') +
+      ('undefined' !== typeof context ? `${'[' + context + ']'} ` : '') +
+      `${message} - ` +
+      `${safeStringify(meta)}`
+    );
+  });
