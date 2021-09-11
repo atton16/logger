@@ -1,4 +1,5 @@
 module.exports = {
+  files: ['*.ts', '*.tsx'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
@@ -20,14 +21,17 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/ban-types': ['error', {
-      'extendDefaults': false
-    }],
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: false,
+      },
+    ],
     '@typescript-eslint/explicit-module-boundary-types': [
       'error',
       {
-        'allowArgumentsExplicitlyTypedAsAny': true
-      }
-    ]
+        allowArgumentsExplicitlyTypedAsAny: true,
+      },
+    ],
   },
 };

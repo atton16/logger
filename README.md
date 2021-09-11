@@ -18,7 +18,6 @@ import { logger } from '@atton16/logger';
 logger.log('info', 'hello world');
 logger.debug('debug message');
 logger.info('some log');
-
 ```
 
 ### JavaScript
@@ -29,23 +28,22 @@ const logger = require('@atton16/logger').logger;
 logger.log('info', 'hello world');
 logger.debug('debug message');
 logger.info('some log');
-
 ```
 
 ## Configuration
 
 The logger can be configured using environment variables. Here is the support configuration.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| LOG_FILE_PREFIX | File prefiex (should be your application name) | `` |
-| LOG_MAX_FILES | Maximum file to be kept | `60d` |
-| LOG_FOLDER | Log folder for file transport | `./logs` |
-| LOG_LEVEL | Log level for console transport | `debug` |
-| LOG_APP_NAME | Set logging app name | `NestWinston` |
-| LOG_COLOR | Enable log coloring | `true` |
-| LOG_TIMESTAMP | Include timestamp in log message | `true` |
-| LOG_TRANSPORTS | Transports to emit log | `console,file` |
+| Variable        | Description                                    | Default        |
+| --------------- | ---------------------------------------------- | -------------- |
+| LOG_FILE_PREFIX | File prefiex (should be your application name) | ``             |
+| LOG_MAX_FILES   | Maximum file to be kept                        | `60d`          |
+| LOG_FOLDER      | Log folder for file transport                  | `./logs`       |
+| LOG_LEVEL       | Log level for console transport                | `debug`        |
+| LOG_APP_NAME    | Set logging app name                           | `NestWinston`  |
+| LOG_COLOR       | Enable log coloring                            | `true`         |
+| LOG_TIMESTAMP   | Include timestamp in log message               | `true`         |
+| LOG_TRANSPORTS  | Transports to emit log                         | `console,file` |
 
 ### Log Level
 
@@ -85,13 +83,12 @@ const app = express();
 app.use(activityLogMiddleware);
 
 app.get('/', (req, res) => {
-  res.json({'timestamp': Date.now()});
+  res.json({ timestamp: Date.now() });
 });
 
 app.listen(3000, () => {
   logger.info(`Listening at 127.0.0.1:3000`);
 });
-
 ```
 
 ### Skip Dumping Response Body
@@ -113,10 +110,11 @@ export class AppController {
   @UseInterceptors(ActivityLogResponseSkipBody)
   helloWorld(): string {
     let ret: string;
-    for (let i = 0; i < 100000000; i++) { ret += 'A'; }
+    for (let i = 0; i < 100000000; i++) {
+      ret += 'A';
+    }
     return ret; // 100 million A's
   }
-
 }
 ```
 
@@ -135,12 +133,13 @@ app.use(activityLogMiddleware);
 
 app.get('/', responseSkipBody, (req, res) => {
   let ret;
-  for (let i = 0; i < 100000000; i++) { ret += 'A'; }
+  for (let i = 0; i < 100000000; i++) {
+    ret += 'A';
+  }
   res.send(ret);
 });
 
 app.listen(3000);
-
 ```
 
 ## License
